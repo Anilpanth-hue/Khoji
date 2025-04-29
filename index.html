@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khoji</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+      <div class="container-fluid px-0">
+        <a class="navbar-brand ms-3" href="#home">
+          <img src="logo.png" alt="Logo" class="logo" />
+        </a>
+        <div class="d-flex align-items-center me-3">
+          <ul class="navbar-nav me-2">
+            <li class="nav-item">
+              <a class="nav-link about-link" href="#about">About Us</a>
+            </li>
+          </ul>
+          <div class="dropdown">
+            <div
+              class="dropdown-toggle-custom"
+              id="dropdown-menu"
+              data-bs-toggle="dropdown"
+            >
+              <i class="bi bi-list menu-icon" style="font-size: 28px"></i>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
+              <li><a class="dropdown-item" href="#our-story">Our Story</a></li>
+              <li><a class="dropdown-item" href="#team">Team</a></li>
+              <li><a class="dropdown-item" href="#contact">Contact</a></li>
+              <li><a class="dropdown-item" href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-md-10 col-lg-8">
+            <h1 class="main-heading">
+              <span class="gradient-text">
+                If you care for your family or loved ones
+              </span>
+              we're here. If not, we're of no use.
+            </h1>
+            <p class="sub-heading">
+              Protecting what matters most with care and compassion
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Section -->
+    <section class="photo-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center">
+            <div class="main-image-container">
+              <img
+                src="Jp.jpg"
+                alt="Family under umbrella"
+                class="main-image img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliation Section -->
+    <section class="affiliation-section" id="affiliations">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-heading gradient-text">
+              Affiliation & Partnership
+            </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="affiliation-slider">
+              <div class="affiliation-track">
+                <div class="affiliation-slide">
+                  <img
+                    src="digilocker.jpeg"
+                    alt="DigiLocker"
+                    class="affiliation-image"
+                  />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="AIM.jpg" alt="AIM" class="affiliation-image" />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="rru.jpeg" alt="RRU" class="affiliation-image" />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="aic.jpg" alt="AIC" class="affiliation-image" />
+                </div>
+                <!-- Duplicate slides for continuous loop with proper spacing -->
+                <div class="affiliation-slide">
+                  <img
+                    src="digilocker.jpeg"
+                    alt="DigiLocker"
+                    class="affiliation-image"
+                  />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="AIM.jpg" alt="AIM" class="affiliation-image" />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="rru.jpeg" alt="RRU" class="affiliation-image" />
+                </div>
+                <div class="affiliation-slide">
+                  <img src="aic.jpg" alt="AIC" class="affiliation-image" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="slider-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="slider-container">
+              <div
+                id="mainCarousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#mainCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#mainCarousel"
+                    data-bs-slide-to="1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#mainCarousel"
+                    data-bs-slide-to="2"
+                  ></button>
+                </div>
+                <!-- <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="slider-content">
+                      <h3 class="gradient-text">Protection for your family</h3>
+                      <p>
+                        We provide comprehensive coverage that ensures your
+                        loved ones are protected.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="slider-content">
+                      <h3 class="gradient-text">Peace of mind</h3>
+                      <p>
+                        Rest easy knowing that your family's future is secure
+                        with our services.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="slider-content">
+                      <h3 class="gradient-text">Personalized solutions</h3>
+                      <p>
+                        We create custom plans tailored to your family's
+                        specific needs and circumstances.
+                      </p>
+                    </div>
+                  </div>
+                </div> -->
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#mainCarousel"
+                  data-bs-slide="prev"
+                >
+                  <i class="bi bi-chevron-left carousel-control-icon"></i>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#mainCarousel"
+                  data-bs-slide="next"
+                >
+                  <i class="bi bi-chevron-right carousel-control-icon"></i>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="about">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-heading gradient-text">Why Choose Us</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-container mb-4">
+                  <i class="bi bi-shield-check" style="font-size: 40px"></i>
+                </div>
+                <h5 class="card-title">Complete Protection</h5>
+                <p class="card-text">
+                  We offer comprehensive coverage that ensures your family is
+                  protected in all circumstances.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-container mb-4">
+                  <i class="bi bi-heart-fill" style="font-size: 40px"></i>
+                </div>
+                <h5 class="card-title">Care & Compassion</h5>
+                <p class="card-text">
+                  Our approach is built on genuine care for your family's
+                  wellbeing and future security.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-container mb-4">
+                  <i class="bi bi-clock" style="font-size: 40px"></i>
+                </div>
+                <h5 class="card-title">Timely Support</h5>
+                <p class="card-text">
+                  We're always there when you need us, providing prompt
+                  assistance and support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-heading">
+              <span class="bold-black">Thousands already trust</span>
+            </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <p>
+                  "The peace of mind we've gained since working with this
+                  company is immeasurable. They truly care about our family's
+                  wellbeing and future."
+                </p>
+                <div class="client-info">
+                  <h5 class="gradient-textual">Rajesh Sharma</h5>
+                  <p class="client-role">Client since 2020</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <p>
+                  "Their personalized approach made all the difference. They
+                  took the time to understand our unique needs and provided
+                  solutions that work perfectly for us."
+                </p>
+                <div class="client-info">
+                  <h5 class="gradient-textual">Priya Patel</h5>
+                  <p class="client-role">Client since 2021</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8 text-center">
+            <h2 class="cta-heading gradient-text">
+              Ready to protect what matters most?
+            </h2>
+            <p class="cta-text">
+              Take the first step towards securing your family's future today.
+            </p>
+            <button class="cta-button">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
