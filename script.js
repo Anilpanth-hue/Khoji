@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sliderObserver.observe(affiliationTrack);
   }
 
-  // Testimonial Slider
+  // Testimonial Slider - Updated for client requirements
   const testimonialsTrack = document.querySelector(".testimonials-track");
   if (testimonialsTrack) {
     let startX;
@@ -102,21 +102,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Calculate how many slides to show at once based on screen width
     function getSlidesPerView() {
-      return window.innerWidth >= 768 ? 2 : 1;
+      if (window.innerWidth >= 1200) {
+        return 5; // Desktop: Show 5 testimonials
+      } else if (window.innerWidth >= 768) {
+        return 3; // Tablet: Show 3 testimonials
+      } else {
+        return 1.5; // Mobile: Show 1.5 testimonials (one full and half of another)
+      }
+    }
+
+    // Calculate slide width based on how many should be visible
+    function getSlideWidth() {
+      return 100 / getSlidesPerView();
+    }
+
+    // Set initial widths for all slides
+    function setSlideWidths() {
+      const slideWidth = getSlideWidth();
+      slides.forEach((slide) => {
+        slide.style.minWidth = `${slideWidth}%`;
+        slide.style.flex = `0 0 ${slideWidth}%`;
+      });
     }
 
     // Update slider position
     function updateSliderPosition() {
       const slidesPerView = getSlidesPerView();
-      const maxIndex = slideCount - slidesPerView;
+      const maxIndex = slideCount - Math.floor(slidesPerView);
 
       // Prevent sliding past the last slide
       if (currentIndex > maxIndex) {
         currentIndex = maxIndex;
       }
 
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+
       // Calculate percentage to translate
-      const translatePercentage = -(currentIndex * (100 / slidesPerView));
+      const translatePercentage = -(currentIndex * getSlideWidth());
       testimonialsTrack.style.transform = `translateX(${translatePercentage}%)`;
     }
 
@@ -149,14 +173,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Determine if we should move to the next or previous slide
       const threshold = 50; // minimum distance to trigger slide change
-      const slidesPerView = getSlidesPerView();
 
-      if (diff < -threshold && currentIndex < slideCount - slidesPerView) {
+      if (diff < -threshold) {
         // Swipe left - next slide
-        currentIndex++;
-      } else if (diff > threshold && currentIndex > 0) {
+        currentIndex += 1;
+      } else if (diff > threshold) {
         // Swipe right - previous slide
-        currentIndex--;
+        currentIndex -= 1;
       }
 
       updateSliderPosition();
@@ -185,14 +208,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Determine if we should move to the next or previous slide
       const threshold = 50;
-      const slidesPerView = getSlidesPerView();
 
-      if (diff < -threshold && currentIndex < slideCount - slidesPerView) {
+      if (diff < -threshold) {
         // Swipe left - next slide
-        currentIndex++;
-      } else if (diff > threshold && currentIndex > 0) {
+        currentIndex += 1;
+      } else if (diff > threshold) {
         // Swipe right - previous slide
-        currentIndex--;
+        currentIndex -= 1;
       }
 
       updateSliderPosition();
@@ -209,9 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize slider
     testimonialsTrack.style.cursor = "grab";
+    setSlideWidths();
 
     // Handle window resize
     window.addEventListener("resize", () => {
+      setSlideWidths();
       updateSliderPosition();
     });
 
