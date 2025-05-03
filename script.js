@@ -89,4 +89,133 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sliderObserver.observe(affiliationTrack);
   }
+
+  // Testimonial Slider
+  const testimonialsTrack = document.querySelector(".testimonials-track");
+  if (testimonialsTrack) {
+    let startX;
+    let currentTranslate = 0;
+    let isDragging = false;
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".testimonial-slide");
+    const slideCount = slides.length;
+
+    // Calculate how many slides to show at once based on screen width
+    function getSlidesPerView() {
+      return window.innerWidth >= 768 ? 2 : 1;
+    }
+
+    // Update slider position
+    function updateSliderPosition() {
+      const slidesPerView = getSlidesPerView();
+      const maxIndex = slideCount - slidesPerView;
+
+      // Prevent sliding past the last slide
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+
+      // Calculate percentage to translate
+      const translatePercentage = -(currentIndex * (100 / slidesPerView));
+      testimonialsTrack.style.transform = `translateX(${translatePercentage}%)`;
+    }
+
+    // Touch events
+    testimonialsTrack.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    testimonialsTrack.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+
+        // Prevent default to stop page scrolling while swiping
+        if (Math.abs(diff) > 5) {
+          e.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+
+    testimonialsTrack.addEventListener("touchend", (e) => {
+      if (!isDragging) return;
+
+      const currentX = e.changedTouches[0].clientX;
+      const diff = currentX - startX;
+
+      // Determine if we should move to the next or previous slide
+      const threshold = 50; // minimum distance to trigger slide change
+      const slidesPerView = getSlidesPerView();
+
+      if (diff < -threshold && currentIndex < slideCount - slidesPerView) {
+        // Swipe left - next slide
+        currentIndex++;
+      } else if (diff > threshold && currentIndex > 0) {
+        // Swipe right - previous slide
+        currentIndex--;
+      }
+
+      updateSliderPosition();
+      isDragging = false;
+    });
+
+    // Mouse events for desktop
+    testimonialsTrack.addEventListener("mousedown", (e) => {
+      startX = e.clientX;
+      isDragging = true;
+      testimonialsTrack.style.cursor = "grabbing";
+
+      // Prevent default drag behavior
+      e.preventDefault();
+    });
+
+    testimonialsTrack.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+    });
+
+    testimonialsTrack.addEventListener("mouseup", (e) => {
+      if (!isDragging) return;
+
+      const currentX = e.clientX;
+      const diff = currentX - startX;
+
+      // Determine if we should move to the next or previous slide
+      const threshold = 50;
+      const slidesPerView = getSlidesPerView();
+
+      if (diff < -threshold && currentIndex < slideCount - slidesPerView) {
+        // Swipe left - next slide
+        currentIndex++;
+      } else if (diff > threshold && currentIndex > 0) {
+        // Swipe right - previous slide
+        currentIndex--;
+      }
+
+      updateSliderPosition();
+      isDragging = false;
+      testimonialsTrack.style.cursor = "grab";
+    });
+
+    testimonialsTrack.addEventListener("mouseleave", () => {
+      if (isDragging) {
+        isDragging = false;
+        testimonialsTrack.style.cursor = "grab";
+      }
+    });
+
+    // Initialize slider
+    testimonialsTrack.style.cursor = "grab";
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      updateSliderPosition();
+    });
+
+    // Initial position
+    updateSliderPosition();
+  }
 });
