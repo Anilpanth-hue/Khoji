@@ -1,193 +1,92 @@
-// This file contains all the JavaScript logic for the website
-// Using standard JavaScript without JSX syntax
+document.addEventListener("DOMContentLoaded", function () {
+  // Lazy load images
+  const lazyImages = document.querySelectorAll(
+    ".gallery-image, .service-image"
+  );
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Initialize all dropdowns
-  const dropdownToggle = document.querySelector(".dropdown-toggle-custom");
-  const dropdownMenu = document.querySelector(".dropdown-menu");
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute("data-src");
 
-  // Manual toggle for dropdown if needed (Bootstrap should handle this automatically)
-  if (dropdownToggle && !window.bootstrap) {
-    dropdownToggle.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-    });
+            if (src) {
+              img.src = src;
+              img.classList.add("in-view");
+              img.removeAttribute("data-src");
+            }
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (event) => {
-      if (
-        !dropdownToggle.contains(event.target) &&
-        !dropdownMenu.contains(event.target)
-      ) {
-        dropdownMenu.classList.remove("show");
-      }
-    });
-  }
-
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        const navbarHeight = document.querySelector(".navbar").offsetHeight;
-        const targetPosition =
-          targetElement.getBoundingClientRect().top +
-          window.pageYOffset -
-          navbarHeight;
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
+            imageObserver.unobserve(img);
+          }
         });
-
-        // Close mobile dropdown menu if open
-        if (dropdownMenu.classList.contains("show")) {
-          dropdownMenu.classList.remove("show");
-        }
+      },
+      {
+        rootMargin: "50px 0px",
+        threshold: 0.01,
       }
-    });
-  });
+    );
 
-  // CTA button click handler
-  const ctaButton = document.querySelector(".cta-button");
-  if (ctaButton) {
-    ctaButton.addEventListener("click", () => {
-      // You can add custom logic here, like opening a form or redirecting
-      alert("Thank you for your interest! We will contact you shortly.");
+    lazyImages.forEach((img) => {
+      // Store original src in data-src attribute
+      if (!img.getAttribute("data-src")) {
+        img.setAttribute("data-src", img.src);
+        // Use a small placeholder initially
+        img.src =
+          'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+      }
+      imageObserver.observe(img);
     });
   }
 
-  // Feature card animations
-  const featureCards = document.querySelectorAll(".feature-card");
-  featureCards.forEach((card) => {
-    card.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-10px)";
-      this.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.1)";
-    });
+  // Optimize animations
+  const serviceItems = document.querySelectorAll(".service-item");
+  const galleryCards = document.querySelectorAll(".gallery-card");
+  const elementsToAnimate = [...serviceItems, ...galleryCards];
 
-    card.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0)";
-      this.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.05)";
-    });
-  });
+  if ("IntersectionObserver" in window) {
+    const animationObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            // Stop observing after animation is triggered
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
 
-  // Affiliation images hover effect
-  const affiliationImages = document.querySelectorAll(".affiliation-image");
-  affiliationImages.forEach((image) => {
-    image.addEventListener("mouseenter", function () {
-      this.style.transform = "scale(1.05)";
+    elementsToAnimate.forEach((element) => {
+      animationObserver.observe(element);
     });
+  }
 
-    image.addEventListener("mouseleave", function () {
-      this.style.transform = "scale(1)";
-    });
-  });
-
-  // Pause affiliation slider on hover
+  // Optimize affiliation slider animation
   const affiliationTrack = document.querySelector(".affiliation-track");
   if (affiliationTrack) {
-    affiliationTrack.addEventListener("mouseenter", function () {
-      this.style.animationPlayState = "paused";
-    });
-
-    affiliationTrack.addEventListener("mouseleave", function () {
-      this.style.animationPlayState = "running";
-    });
-  }
-
-  // Carousel initialization (Bootstrap should handle this automatically)
-  const carousel = document.getElementById("mainCarousel");
-  if (carousel && !window.bootstrap) {
-    // Simple carousel functionality if Bootstrap is not loaded
-    const items = carousel.querySelectorAll(".carousel-item");
-    const indicators = carousel.querySelectorAll(".carousel-indicators button");
-    const prevButton = carousel.querySelector(".carousel-control-prev");
-    const nextButton = carousel.querySelector(".carousel-control-next");
-    let currentIndex = 0;
-
-    function showSlide(index) {
-      items.forEach((item, i) => {
-        item.classList.remove("active");
-        if (i === index) item.classList.add("active");
-      });
-
-      indicators.forEach((indicator, i) => {
-        indicator.classList.remove("active");
-        if (i === index) indicator.classList.add("active");
-      });
-
-      currentIndex = index;
-    }
-
-    indicators.forEach((indicator, i) => {
-      indicator.addEventListener("click", () => showSlide(i));
-    });
-
-    prevButton.addEventListener("click", () => {
-      let newIndex = currentIndex - 1;
-      if (newIndex < 0) newIndex = items.length - 1;
-      showSlide(newIndex);
-    });
-
-    nextButton.addEventListener("click", () => {
-      let newIndex = currentIndex + 1;
-      if (newIndex >= items.length) newIndex = 0;
-      showSlide(newIndex);
-    });
-
-    // Auto-slide functionality
-    setInterval(() => {
-      let newIndex = currentIndex + 1;
-      if (newIndex >= items.length) newIndex = 0;
-      showSlide(newIndex);
-    }, 5000);
-  }
-
-  // Add active class to nav items based on scroll position
-  function updateActiveNavItem() {
-    const sections = document.querySelectorAll("section[id]");
-    const scrollPosition = window.pageYOffset + 100; // Offset for navbar height
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute("id");
-
-      if (
-        scrollPosition >= sectionTop &&
-        scrollPosition < sectionTop + sectionHeight
-      ) {
-        document
-          .querySelector(`.navbar a[href="#${sectionId}"]`)
-          ?.classList.add("active");
-      } else {
-        document
-          .querySelector(`.navbar a[href="#${sectionId}"]`)
-          ?.classList.remove("active");
+    // Pause animation when not in viewport to save resources
+    const sliderObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            affiliationTrack.style.animationPlayState = "running";
+          } else {
+            affiliationTrack.style.animationPlayState = "paused";
+          }
+        });
+      },
+      {
+        rootMargin: "0px",
+        threshold: 0,
       }
-    });
+    );
+
+    sliderObserver.observe(affiliationTrack);
   }
-
-  // Update active nav item on scroll
-  window.addEventListener("scroll", updateActiveNavItem);
-});
-
-// Responsive navbar handling
-window.addEventListener("resize", () => {
-  const navbar = document.querySelector(".navbar");
-  if (window.innerWidth < 992) {
-    navbar.classList.add("navbar-light");
-  } else {
-    navbar.classList.remove("navbar-light");
-  }
-});
-
-// Initialize any components that need JavaScript on page load
-window.addEventListener("load", () => {
-  // You can add any initialization code here
-  console.log("Website loaded successfully!");
 });
