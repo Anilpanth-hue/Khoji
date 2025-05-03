@@ -128,38 +128,106 @@ body {
   background-color: white;
 }
 
-.service-content {
-  padding: 20px;
+.service-item {
+  padding: 60px 0;
+  background: transparent;
+}
+
+.service-item .row {
+  display: flex;
+  align-items: flex-start;
 }
 
 .service-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
+  margin-top: 0;
   margin-bottom: 20px;
   color: #333;
 }
-
-.service-description {
-  font-size: 1.1rem;
-  color: #666;
-  line-height: 1.6;
+.service-content {
+  padding: 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-bottom: 170px;
 }
 
-.service-image-container {
+.service-content1 {
+  padding: 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-bottom: 130px;
+}
+.service-content2 {
+  padding: 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-bottom: 140px;
+}
+.service-content3 {
+  padding: 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-bottom: 100px;
+}
+.service-content4 {
+  padding: 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-bottom: 100px;
+}
+
+.service-text {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+.service-image-wrapper {
   height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  max-width: 100%;
+  background: none;
 }
 
-/* Also update the service-image rule for consistency */
+/* Mobile styles */
+@media (max-width: 767px) {
+  .service-content {
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .service-image-wrapper {
+    height: 300px;
+  }
+}
+
 .service-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Changed back to 'cover' to fill the width */
+  object-fit: cover;
   transition: opacity 0.3s ease;
 }
 
@@ -170,7 +238,7 @@ body {
 
 .service-item {
   padding: 60px 0;
-  background: transparent; /* Make service item background transparent */
+  background: transparent;
 }
 
 .service-image-wrapper {
@@ -179,47 +247,35 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 0; /* Removed border radius */
-  box-shadow: none; /* Removed box shadow */
+  border-radius: 0;
+  box-shadow: none;
   margin: 0 auto;
   max-width: 100%;
-  background: none; /* Removed background */
+  background: none;
 }
 
 /* Change this CSS rule in your style.css file */
 .gallery-image {
   width: 100%;
-  height: auto; /* Changed from 100% to auto to maintain aspect ratio */
-  max-height: 100%; /* Added to ensure image doesn't overflow container */
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
   transition: opacity 0.3s ease;
   opacity: 0;
-  padding: 0; /* Removed padding */
-  background: transparent; /* Ensure image background is transparent */
+  padding: 0;
+  background: transparent;
 }
 
 .gallery-image[src]:not([src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"]) {
   opacity: 1;
 }
 
-.service-content {
-  padding: 20px;
-}
+/* Replace the existing affiliation section styles in style.css with these: */
 
-.service-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #333;
+.affiliation-section {
+  padding: 60px 0;
+  background-color: white;
 }
-
-.service-text {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.6;
-}
-
-/* Replace the existing affiliation-slider, affiliation-track, affiliation-slide, and affiliation-image styles with these: */
 
 .affiliation-slider {
   width: 100%;
@@ -229,63 +285,50 @@ body {
 
 .affiliation-track {
   display: flex;
-  animation: scroll 7s linear infinite;
-  width: calc(400px * 8); /* Width of each slide * number of slides */
-  gap: 60px; /* Add gap between slides */
+  transition: transform 0.5s ease;
+  gap: 30px;
+  padding: 20px 0;
 }
 
 .affiliation-slide {
-  width: 200px;
-  height: 120px;
-  flex-shrink: 0;
+  flex: 0 0 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.affiliation-image {
-  width: 200px;
-  height: 120px;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 200px;
   transition: transform 0.3s ease;
 }
 
-/* Update the keyframes animation to account for the gap */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-300px * 4)); /* Width of each slide+gap * number of unique slides */
-  }
+.affiliation-slide.active {
+  transform: scale(1.05);
 }
 
-/* Update the responsive styles for the affiliation section */
+.affiliation-image {
+  height: 160px;
+  width: auto;
+  max-width: 95%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.affiliation-image-digi{
+  height: 250px;
+  width: auto;
+  max-width: 95%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 75px;
+}
+
 @media (max-width: 768px) {
   .affiliation-slide {
-    width: 160px;
-    height: 100px;
-  }
-
-  .affiliation-image {
-    width: 180px;
-    height: 120px;
-  }
-
-  .affiliation-track {
-    width: calc(220px * 8);
-    gap: 40px;
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-220px * 4));
-    }
+    flex: 0 0 250px;
+    height: 180px;
   }
 }
 
@@ -421,6 +464,9 @@ body {
 .client-info {
   display: flex;
   flex-direction: column;
+}
+.stars{
+  margin-top: -11px;
 }
 
 .client-info h5 {
@@ -559,7 +605,7 @@ body {
 /* Mobile: Show 1 full testimonial and half of another */
 @media (max-width: 767px) {
   .testimonial-slide {
-    min-width: 85%; /* Show one full testimonial */
+    min-width: 85%;
     flex: 0 0 85%;
   }
 }
@@ -567,7 +613,7 @@ body {
 /* Tablet: Show 2-3 testimonials */
 @media (min-width: 768px) and (max-width: 1199px) {
   .testimonial-slide {
-    min-width: 33.333%; /* Show three testimonials */
+    min-width: 33.333%;
     flex: 0 0 33.333%;
   }
 }
@@ -575,7 +621,7 @@ body {
 /* Desktop: Show 4-5 testimonials */
 @media (min-width: 1200px) {
   .testimonial-slide {
-    min-width: 20%; /* Show five testimonials */
+    min-width: 20%;
     flex: 0 0 20%;
   }
 }
@@ -621,5 +667,5 @@ body {
 
 /* Override the white background for service-item */
 .bg-white {
-  background: transparent !important; /* Override white background */
+  background: transparent !important;
 }
