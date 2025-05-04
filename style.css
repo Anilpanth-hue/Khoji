@@ -34,12 +34,13 @@ body {
 .navbar-custom {
   padding: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  background: linear-gradient(to bottom, #fff6f5, #ffecea);
 }
 
 .logo {
-  width: 120px;
-  height: 90px;
+  width: 135px;
+  height: 125px;
+  
 }
 
 .menu-icon {
@@ -72,7 +73,7 @@ body {
 
 /* Hero Section Styles */
 .hero-section {
-  padding-top: 100px !important;
+  padding-top: 130px !important;
   padding-bottom: 10px !important;
   background-color: white;
 }
@@ -91,7 +92,7 @@ body {
   font-size: 1.25rem;
   color: #333;
   margin-bottom: 2rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Photo Section Styles */
@@ -359,7 +360,7 @@ body {
     box-sizing: border-box !important;
   }
   .hero-section {
-    padding-top: 100px !important;
+    padding-top: 150px !important;
     padding-bottom: 4px !important;
   }
   .main-heading {
@@ -372,6 +373,9 @@ body {
   .affiliation-section .section-heading {
     margin-top: 4px !important;
     margin-bottom: 8px !important;
+  }
+  .service-item .service-image-wrapper {
+    margin-bottom: 24px !important;
   }
 }
 
@@ -438,7 +442,7 @@ body {
   display: flex;
   gap: 30px;
   padding: -20px 0;
-  animation: scrollMedia 13s linear infinite alternate-reverse;
+  animation: scrollMedia 5s linear infinite alternate-reverse;
   will-change: transform;
 }
 
@@ -538,7 +542,7 @@ body {
 }
 
 .section-heading {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 700;
   margin-bottom: 20px;
   /* margin-bottom: 1rem; */
@@ -682,7 +686,7 @@ body {
   .section-heading,
   .bold-black,
   .cta-heading {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .slider-content {
@@ -1128,7 +1132,7 @@ body {
   background: #fafbfc;
 }
 .get-started-section .section-heading {
-  font-size: 2.3rem;
+  font-size: 2.1rem;
   font-weight: 700;
   margin-bottom: 2.5rem;
 }
@@ -1192,7 +1196,7 @@ body {
 }
 @media (max-width: 767px) {
   .get-started-section .section-heading {
-    font-size: 1.3rem;
+    font-size: 1.7rem;
   }
   .get-started-box {
     min-width: 90vw;
@@ -1349,12 +1353,18 @@ section, .section, .container, .row {
 .affiliation-section,
 .get-started-section,
 .testimonials-section,
-.our-services-section,
+/* .our-services-section, */
 .patents-section,
 .media-coverage-section,
 .cta-section,
 .main-footer {
   padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.our-services-section{
+  padding-top: 54px !important;
   padding-bottom: 24px !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -1382,7 +1392,7 @@ section, .section, .container, .row {
 
 /* Remove negative paddings/margins from custom classes */
 .affiliation-section, .affiliation-track, .media-box, .media-slider, .media-track, .patents-section, .patents-grid {
-  padding-top: 0 !important;
+  padding-top: 20px !important;
   padding-bottom: 0 !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -1412,7 +1422,7 @@ section, .section, .container, .row {
   .media-coverage-section,
   .cta-section,
   .main-footer {
-    padding-top: 12px !important;
+    padding-top: 50px !important;
     padding-bottom: 12px !important;
   }
   .section-heading,
@@ -1437,5 +1447,11 @@ section, .section, .container, .row {
   .service-image-wrapper {
     margin-bottom: 10px !important;
     padding-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .service-item .service-image-wrapper {
+    margin-bottom: 24px !important;
   }
 }
