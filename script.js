@@ -242,7 +242,62 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial position
     updateSliderPosition();
   }
+
+  // Officials section optimization
+  const officialsTrack = document.querySelector(".officials-track");
+  if (officialsTrack) {
+    // Pause animation when not in viewport to save resources
+    const officialsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            officialsTrack.style.animationPlayState = "running";
+          } else {
+            officialsTrack.style.animationPlayState = "paused";
+          }
+        });
+      },
+      {
+        rootMargin: "0px",
+        threshold: 0,
+      }
+    );
+
+    officialsObserver.observe(officialsTrack);
+
+    // Lazy load official images
+    const officialImages = document.querySelectorAll(".official-image");
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute("data-src");
+            if (src) {
+              img.src = src;
+              img.removeAttribute("data-src");
+              observer.unobserve(img);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "50px 0px",
+        threshold: 0.1,
+      }
+    );
+
+    officialImages.forEach((img) => {
+      if (!img.getAttribute("data-src")) {
+        img.setAttribute("data-src", img.src);
+        img.src =
+          'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+      }
+      imageObserver.observe(img);
+    });
+  }
 });
+
 // Add this code to your script.js file, after the existing DOMContentLoaded event listener code
 
 // Affiliation slider with active state and controlled movement
@@ -378,4 +433,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize the affiliation slider
   initAffiliationSlider();
+});
+
+// Media Image Modal functionality
+window.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("mediaImageModal");
+  const modalImg = document.getElementById("mediaModalImg");
+  const closeBtn = document.querySelector(".media-modal-close");
+  const triggers = document.querySelectorAll(".open-image-modal");
+
+  triggers.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const imgSrc = btn.getAttribute("data-img");
+      if (imgSrc) {
+        modalImg.src = imgSrc;
+        modal.classList.add("show");
+        modal.style.display = "flex";
+      }
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove("show");
+    modal.style.display = "none";
+    modalImg.src = "";
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (
+      modal.classList.contains("show") &&
+      (e.key === "Escape" || e.key === "Esc")
+    ) {
+      closeModal();
+    }
+  });
+});
+
+// Patent Image Modal functionality
+window.addEventListener("DOMContentLoaded", function () {
+  const patentModal = document.getElementById("patentImageModal");
+  const patentModalImg = document.getElementById("patentModalImg");
+  const patentCloseBtn = patentModal.querySelector(".media-modal-close");
+  const patentTriggers = document.querySelectorAll(".clickable-patent");
+
+  patentTriggers.forEach((img) => {
+    img.addEventListener("click", function (e) {
+      e.preventDefault();
+      const imgSrc = img.getAttribute("src");
+      if (imgSrc) {
+        patentModalImg.src = imgSrc;
+        patentModal.classList.add("show");
+        patentModal.style.display = "flex";
+      }
+    });
+  });
+
+  function closePatentModal() {
+    patentModal.classList.remove("show");
+    patentModal.style.display = "none";
+    patentModalImg.src = "";
+  }
+
+  patentCloseBtn.addEventListener("click", closePatentModal);
+  patentModal.addEventListener("click", function (e) {
+    if (e.target === patentModal) {
+      closePatentModal();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (
+      patentModal.classList.contains("show") &&
+      (e.key === "Escape" || e.key === "Esc")
+    ) {
+      closePatentModal();
+    }
+  });
 });
