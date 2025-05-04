@@ -38,8 +38,8 @@ body {
 }
 
 .logo {
-  width: 100px;
-  height: 80px;
+  width: 120px;
+  height: 90px;
 }
 
 .menu-icon {
@@ -72,16 +72,19 @@ body {
 
 /* Hero Section Styles */
 .hero-section {
-  padding: 120px 0 60px;
+  padding-top: 100px !important;
+  padding-bottom: 10px !important;
   background-color: white;
 }
 
 .main-heading {
   font-size: 2.3rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
+  margin-top: 0 !important;
+  color: black;
   line-height: 1.2;
-  color: black; /* Default text color */
+  display: block;
 }
 
 .sub-heading {
@@ -108,6 +111,15 @@ body {
   height: auto;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Add small gap between image and Affiliation heading */
+.photo-section .main-image-container {
+  margin-bottom: 16px !important;
+}
+.affiliation-section .section-heading {
+  margin-top: 8px !important;
+  margin-bottom: 12px !important;
 }
 
 /* How It Works Section */
@@ -346,6 +358,21 @@ body {
     text-align: left !important;
     box-sizing: border-box !important;
   }
+  .hero-section {
+    padding-top: 100px !important;
+    padding-bottom: 4px !important;
+  }
+  .main-heading {
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem !important;
+  }
+  .photo-section .main-image-container {
+    margin-bottom: 10px !important;
+  }
+  .affiliation-section .section-heading {
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+  }
 }
 
 .service-image {
@@ -397,7 +424,7 @@ body {
 /* Replace the existing affiliation section styles in style.css with these: */
 
 .affiliation-section {
-  padding: 60px 0;
+  padding: -10px 0px 0px 0px;
   background-color: white;
 }
 
@@ -410,7 +437,7 @@ body {
 .affiliation-track {
   display: flex;
   gap: 30px;
-  padding: 20px 0;
+  padding: -20px 0;
   animation: scrollMedia 13s linear infinite alternate-reverse;
   will-change: transform;
 }
@@ -452,8 +479,9 @@ body {
 
 @media (max-width: 768px) {
   .affiliation-slide {
-    flex: 0 0 250px;
+    flex: 0 0 290px;
     height: 180px;
+    padding: -30px;
   }
 }
 
@@ -945,7 +973,7 @@ body {
   padding: 10px 10px 10px 10px;
   margin-bottom: 10px;
   transition: box-shadow 0.2s, transform 0.2s;
-  min-height: 210px;
+  height: 150px;
   box-sizing: border-box;
   flex-shrink: 0; /* Only if using horizontal scrolling */
   max-width: 100%;
@@ -958,8 +986,8 @@ body {
 }
 
 .media-logo-box {
-  width: 170px;
-  height: 90px;
+  width: 200px;
+  height: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1122,7 +1150,8 @@ body {
   max-width: 100%;
   margin: 0 auto;
 }
-.get-started-box:hover {
+.get-started-box:hover,
+.get-started-box:active {
   border: 2.5px solid;
   border-image: linear-gradient(90deg, #0a1e8f 0%, #e01e1e 100%);
   border-image-slice: 1;
@@ -1173,8 +1202,8 @@ body {
     font-size: 1rem;
   }
   .get-started-img {
-    max-width: 70px;
-    max-height: 40px;
+    max-width: 190px;
+    max-height: 200px;
   }}
 
 /* Patents Section Styles */
@@ -1305,5 +1334,108 @@ body {
   .footer-bottom-row {
     flex-direction: column;
     padding-top: 10px;
+  }
+}
+
+/* Universal section spacing reset */
+section, .section, .container, .row {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Reduce section paddings */
+.affiliation-section,
+.get-started-section,
+.testimonials-section,
+.our-services-section,
+.patents-section,
+.media-coverage-section,
+.cta-section,
+.main-footer {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Remove extra margin from headings and rows */
+.section-heading,
+.cta-heading,
+.bold-black,
+.patents-section .section-heading,
+.get-started-section .section-heading,
+.media-coverage-section .section-heading,
+.officials-section .section-heading {
+  margin-bottom: 12px !important;
+  margin-top: 0 !important;
+}
+
+.mb-5, .mb-4, .mb-3, .mb-2, .mb-1 {
+  margin-bottom: 10px !important;
+}
+
+.mt-5, .mt-4, .mt-3, .mt-2, .mt-1 {
+  margin-top: 10px !important;
+}
+
+/* Remove negative paddings/margins from custom classes */
+.affiliation-section, .affiliation-track, .media-box, .media-slider, .media-track, .patents-section, .patents-grid {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Remove extra space from .container and .row */
+.container, .row {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Footer spacing */
+.main-footer {
+  padding-top: 24px !important;
+  padding-bottom: 12px !important;
+}
+
+/* Responsive: even less gap on mobile */
+@media (max-width: 767px) {
+  .affiliation-section,
+  .get-started-section,
+  .testimonials-section,
+  .our-services-section,
+  .patents-section,
+  .media-coverage-section,
+  .cta-section,
+  .main-footer {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  .section-heading,
+  .cta-heading,
+  .bold-black {
+    margin-bottom: 8px !important;
+  }
+  /* Remove gap between service items on mobile */
+  .service-item {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 0 !important;
+  }
+  .service-content,
+  .service-content1,
+  .service-content2,
+  .service-content3,
+  .service-content4 {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .service-image-wrapper {
+    margin-bottom: 10px !important;
+    padding-bottom: 0 !important;
   }
 }
