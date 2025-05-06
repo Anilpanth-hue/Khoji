@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const testimonialsTrack = document.querySelector(".testimonials-track");
   if (testimonialsTrack) {
     let startX;
+    let startY;
     let currentTranslate = 0;
     let isDragging = false;
     let currentIndex = 0;
@@ -147,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Touch events
     testimonialsTrack.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
       isDragging = true;
     });
 
@@ -155,14 +157,17 @@ document.addEventListener("DOMContentLoaded", function () {
       (e) => {
         if (!isDragging) return;
         const currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
+        const currentY = e.touches[0].clientY;
+        const diffX = currentX - startX;
+        const diffY = currentY - startY;
 
-        // Only prevent default if we're actually sliding horizontally
-        // This allows vertical scrolling to work normally
-        if (
-          Math.abs(diff) > 5 &&
-          Math.abs(diff) > Math.abs(e.touches[0].clientY - startX)
-        ) {
+        // If the movement is more vertical than horizontal, allow normal scrolling
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+          return;
+        }
+
+        // Only prevent default for horizontal movements
+        if (Math.abs(diffX) > 5) {
           e.preventDefault();
         }
       },
@@ -173,18 +178,18 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isDragging) return;
 
       const currentX = e.changedTouches[0].clientX;
-      const diff = currentX - startX;
+      const currentY = e.changedTouches[0].clientY;
+      const diffX = currentX - startX;
+      const diffY = currentY - startY;
 
-      // Only trigger slide change if the movement was primarily horizontal
-      const threshold = 50; // minimum distance to trigger slide change
-      const isHorizontalSwipe =
-        Math.abs(diff) > Math.abs(e.changedTouches[0].clientY - startX);
+      // Only handle horizontal swipes
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        const threshold = 50; // minimum distance to trigger slide change
 
-      if (isHorizontalSwipe) {
-        if (diff < -threshold) {
+        if (diffX < -threshold) {
           // Swipe left - next slide
           currentIndex += 1;
-        } else if (diff > threshold) {
+        } else if (diffX > threshold) {
           // Swipe right - previous slide
           currentIndex -= 1;
         }

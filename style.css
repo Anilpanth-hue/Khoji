@@ -444,6 +444,7 @@ body {
   padding: -20px 0;
   animation: scrollMedia 5s linear infinite alternate-reverse;
   will-change: transform;
+  animation-play-state: running;
 }
 
 .affiliation-slide {
@@ -486,6 +487,7 @@ body {
     flex: 0 0 290px;
     height: 180px;
     padding: -30px;
+    animation-play-state: running;
   }
 }
 
@@ -738,94 +740,75 @@ body {
 .feature-card {
   transform: translateZ(0);
   backface-visibility: hidden;
+  animation-play-state: running;
 }
 
 /* Testimonial Slider Styles - Updated for client requirements */
 .testimonials-slider {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
   position: relative;
-  touch-action: pan-x;
+  touch-action: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+  display: flex;
 }
 
 .testimonials-track {
   display: flex;
+  justify-content: space-between;
   transition: transform 0.3s ease-out;
-  width: 100%;
+  min-width: 100%;
+  width: max-content;
+  overflow: visible;
 }
 
-/* Updated testimonial slide styles for desktop to show 4-5 testimonials */
 .testimonial-slide {
-  padding: 0 10px;
+  flex: 0 0 80vw;
+  max-width: 80vw;
+  margin-right: 16px;
+  display: flex;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
-/* Mobile: Show 1 full testimonial and half of another */
-@media (max-width: 767px) {
+.testimonial-card {
+  background: linear-gradient(to right, #0a1e8f, #e01e1e);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  touch-action: auto;
+}
+
+.testimonial-content {
+  padding: 20px;
+  overflow: visible;
+  touch-action: auto;
+}
+
+@media (min-width: 768px) {
   .testimonial-slide {
-    min-width: 85%;
-    flex: 0 0 85%;
+    flex: 0 0 280px;
+    max-width: 320px;
+    margin-right: 20px;
+  }
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 320px;
+    width: 100%;
   }
 }
 
-/* Tablet: Show 2-3 testimonials */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .testimonial-slide {
-    min-width: 33.333%;
-    flex: 0 0 33.333%;
-  }
-}
-
-/* Desktop: Show 4-5 testimonials */
 @media (min-width: 1200px) {
   .testimonial-slide {
-    min-width: 20%;
-    flex: 0 0 20%;
+    margin-right: 64px;
   }
-}
-
-/* Ensure testimonial cards have consistent height */
-.testimonial-card {
-  height: 100%;
-  margin-bottom: 20px;
-}
-
-/* Remove the existing row styling for testimonials */
-.testimonials-section .row:last-child {
-  margin: 0;
-}
-
-/* Update the service item styles for mobile */
-@media (max-width: 767px) {
-  .service-item .row {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Force the image to always come first on mobile */
-  .service-item .service-image-wrapper {
-    order: 1 !important;
-    margin-bottom: 20px;
-  }
-  
-  /* Force the content to always come second on mobile */
-  .service-item .service-content {
-    order: 2 !important;
-  }
-  
-  /* Remove these conflicting rules */
-  .service-item .order-md-1 {
-    order: unset !important;
-  }
-  
-  .service-item .order-md-2 {
-    order: unset !important;
-  }
-}
-
-/* Override the white background for service-item */
-.bg-white {
-  background: transparent !important;
 }
 
 /* Officials Section Styles */
@@ -859,9 +842,9 @@ body {
   }
 }
 
-.officials-track:hover {
+/* .officials-track:hover {
   animation-play-state: paused;
-}
+} */
 
 .official-slide {
   flex: 0 0 300px;
@@ -878,7 +861,7 @@ body {
 
 .official-slide:hover {
   transform: scale(1.05);
-  animation-play-state: paused;
+  /* animation-play-state: paused; */
 }
 
 .official-image {
@@ -918,9 +901,9 @@ body {
 }
 
 /* Pause animation on hover */
-.officials-track:hover {
+/* .officials-track:hover {
   animation-play-state: paused;
-}
+} */
 
 /* Media Coverage Section Styles */
 .media-box {
@@ -949,6 +932,7 @@ body {
   gap: 24px;
   animation: scrollMedia 13s linear infinite alternate-reverse;
   will-change: transform;
+  animation-play-state: running;
 }
 
 @keyframes scrollMedia {
@@ -960,9 +944,9 @@ body {
   }
 }
 
-.media-track:hover {
+/* .media-track:hover {
   animation-play-state: paused;
-}
+} */
 
 .media-slide {
   flex: 0 0 220px;
