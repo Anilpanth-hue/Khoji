@@ -157,8 +157,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentX = e.touches[0].clientX;
         const diff = currentX - startX;
 
-        // Prevent default to stop page scrolling while swiping
-        if (Math.abs(diff) > 5) {
+        // Only prevent default if we're actually sliding horizontally
+        // This allows vertical scrolling to work normally
+        if (
+          Math.abs(diff) > 5 &&
+          Math.abs(diff) > Math.abs(e.touches[0].clientY - startX)
+        ) {
           e.preventDefault();
         }
       },
@@ -171,18 +175,22 @@ document.addEventListener("DOMContentLoaded", function () {
       const currentX = e.changedTouches[0].clientX;
       const diff = currentX - startX;
 
-      // Determine if we should move to the next or previous slide
+      // Only trigger slide change if the movement was primarily horizontal
       const threshold = 50; // minimum distance to trigger slide change
+      const isHorizontalSwipe =
+        Math.abs(diff) > Math.abs(e.changedTouches[0].clientY - startX);
 
-      if (diff < -threshold) {
-        // Swipe left - next slide
-        currentIndex += 1;
-      } else if (diff > threshold) {
-        // Swipe right - previous slide
-        currentIndex -= 1;
+      if (isHorizontalSwipe) {
+        if (diff < -threshold) {
+          // Swipe left - next slide
+          currentIndex += 1;
+        } else if (diff > threshold) {
+          // Swipe right - previous slide
+          currentIndex -= 1;
+        }
+        updateSliderPosition();
       }
 
-      updateSliderPosition();
       isDragging = false;
     });
 
