@@ -158,6 +158,9 @@ body {
   margin-top: 0;
   margin-bottom: 20px;
   color: #333;
+  .text-green{
+    color: #34D399;
+  }
 }
 .service-content {
   padding: 0px 70px;
@@ -1126,22 +1129,23 @@ body {
   align-items: center;
   justify-content: flex-start;
   background: #fff;
-  border: 2px solid #eaeaea;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px rgba(0,0,0,0.07);
+  border: 2.5px solid;
+  border-image: linear-gradient(to right, #0a1e8f, #e01e1e);
+  border-image-slice: 1;
+  min-width: 260px;
+  max-width: 350px;
+  min-height: 180px;
+  box-sizing: border-box;
   padding: 25px 12px 20px 13px;
   text-align: center;
   text-decoration: none;
   transition: border 0.3s, box-shadow 0.2s, transform 0.2s;
-  min-height: 230px;
-  min-width: 260px;
-  max-width: 100%;
   margin: 0 auto;
 }
 .get-started-box:hover,
 .get-started-box:active {
   border: 2.5px solid;
-  border-image: linear-gradient(90deg, #0a1e8f 0%, #e01e1e 100%);
+  border-image: linear-gradient(to right, #0a1e8f, #e01e1e);
   border-image-slice: 1;
   box-shadow: 0 10px 36px rgba(224,30,30,0.10);
   transform: translateY(-6px) scale(1.03);
@@ -1168,7 +1172,9 @@ body {
   }
   .get-started-box {
     min-width: 200px;
-    padding: 24px 8px 18px 8px;
+    max-width: 320px;
+    min-height: 150px;
+    padding: 18px 6vw 12px 6vw;
   }
   .get-started-title {
     font-size: 1.1rem;
@@ -1183,15 +1189,20 @@ body {
     font-size: 1.7rem;
   }
   .get-started-box {
-    min-width: 90vw;
-    padding: 18px 4vw 12px 4vw;
+    min-width: 80vw;
+    max-width: 90vw;
+    min-height: 120px;
+    padding: 12px 2vw 10px 2vw;
+    border-radius: 14px;
   }
   .get-started-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    margin-top: 2px;
   }
   .get-started-img {
-    max-width: 190px;
-    max-height: 200px;
+    max-width: 120px;
+    max-height: 50px;
   }}
 
 /* Patents Section Styles */
