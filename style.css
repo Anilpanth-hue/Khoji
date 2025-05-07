@@ -32,15 +32,23 @@ body {
 
 /* Navbar Styles */
 .navbar-custom {
-  padding: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+  height: 150px !important; /* Adjust as needed for your logo */
+  display: flex;
+  align-items: center;
+  background: rgba(248, 230, 227, 0.7);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to bottom, #fff6f5, #ffecea);
 }
 
 .logo {
-  width: 135px;
-  height: 125px;
-  
+  height: 145px !important; /* Make logo fill navbar height */
+  width: auto !important;
+  max-height: 100% !important;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .menu-icon {
@@ -81,8 +89,8 @@ body {
 .main-heading {
   font-size: 2.3rem;
   font-weight: 700;
-  margin-bottom: 1.5rem !important;
-  margin-top: 0 !important;
+  margin-bottom: 40px;
+  margin-top: -40px ;
   color: black;
   line-height: 1.2;
   display: block;
@@ -242,29 +250,44 @@ body {
 
   .photo-section .container,
   .photo-section .main-image-container {
-    max-width: 100vw;
-    padding-left: 0;
-    padding-right: 0;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   .main-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+    border-radius: 8px;
   }
-  /* Make the text below the image match the image width */
-  .photo-section {
-    margin-bottom: 0;
-  }
+  /* Align the content below the image */
   .photo-section + .container,
   .photo-section + .container .row,
   .photo-section + .container .col-12,
   .photo-section + .container .col-md-6 {
-    max-width: 95vw;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0;
-    padding-right: 0;
+    max-width: 95vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .main-heading,
+  .sub-heading {
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: justify !important;
+    text-align-last: center !important;
+    display: block;
   }
   .service-title,
   .service-text {
@@ -475,7 +498,8 @@ body {
   display: block;
   margin: 0 auto;
 }
-.affiliation-image-digi{
+
+.affiliation-image-digi {
   height: 250px;
   width: auto;
   max-width: 95%;
@@ -487,10 +511,23 @@ body {
 
 @media (max-width: 768px) {
   .affiliation-slide {
-    flex: 0 0 290px;
-    height: 180px;
-    padding: -30px;
+    flex: 0 0 220px;
+    height: 140px;
+    padding: 10px;
     animation-play-state: running;
+  }
+  
+  .affiliation-image {
+    height: 100px;
+  }
+  
+  .affiliation-image-digi {
+    height: 140px;
+    margin-bottom: 30px;
+  }
+  
+  .affiliation-track {
+    gap: 20px;
   }
 }
 
@@ -1142,14 +1179,11 @@ body {
   transition: border 0.3s, box-shadow 0.2s, transform 0.2s;
   margin: 0 auto;
 }
-.get-started-box:hover,
-.get-started-box:active {
+
+.get-started-box:active{
   border: 2.5px solid;
   border-image: linear-gradient(to right, #0a1e8f, #e01e1e);
-  border-image-slice: 1;
   box-shadow: 0 10px 36px rgba(224,30,30,0.10);
-  transform: translateY(-6px) scale(1.03);
-  z-index: 2;
 }
 .get-started-title {
   font-size: 1.45rem;
@@ -1449,4 +1483,50 @@ section, .section, .container, .row {
   .service-item .service-image-wrapper {
     margin-bottom: 24px !important;
   }
+}
+
+@media (max-width: 767px) {
+  .navbar-custom {
+    height: 90px !important;
+  }
+  .logo {
+    height: 80px !important;
+  }
+}
+
+/* Mobile-only Get Started button */
+.mobile-get-started-btn {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobile-get-started-btn {
+    display: block;
+    width: 100vw;
+    max-width: 100vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: linear-gradient(to right, #0a1e8f, #e01e1e);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 0 0 8px 8px;
+    padding: 18px 0 16px 0;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.08);
+    text-align: center;
+    cursor: pointer;
+    transition: background 15s, box-shadow 15s;
+  }
+  .mobile-get-started-btn:active {
+    background: linear-gradient(to right, #e01e1e, #0a1e8f);
+  }
+}
+
+/* Feature box border animation */
+.feature-animate-border {
+  border: 3px solid #e01e1e !important;
+  box-shadow: 0 0 0 4px #0a1e8f33 !important;
+  transition: border 0.3s, box-shadow 0.3s;
 }

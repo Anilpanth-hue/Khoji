@@ -309,9 +309,45 @@ document.addEventListener("DOMContentLoaded", function () {
       imageObserver.observe(img);
     });
   }
+
+  // Mobile Get Started button scroll and animation
+  const getStartedBtn = document.getElementById("mobileGetStartedBtn");
+  const featuresSection = document.getElementById("get-started");
+
+  if (getStartedBtn && featuresSection) {
+    getStartedBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Scroll to features section smoothly
+      featuresSection.scrollIntoView({ behavior: "smooth" });
+
+      // Animate each get-started-box border one by one
+      const boxes = featuresSection.querySelectorAll(".get-started-box");
+      let i = 0;
+      function animateBox() {
+        if (i > 0) {
+          boxes[i - 1].classList.remove("feature-animate-border");
+        }
+        if (i < boxes.length) {
+          boxes[i].classList.add("feature-animate-border");
+          setTimeout(() => {
+            i++;
+            animateBox();
+          }, 350); // Duration for each border
+        } else {
+          // Remove the border after a short delay and restore original
+          setTimeout(() => {
+            boxes.forEach((box) =>
+              box.classList.remove("feature-animate-border")
+            );
+          }, 500);
+        }
+      }
+      animateBox();
+    });
+  }
 });
 
-// Add this code to your script.js file, after the existing DOMContentLoaded event listener code
+// Add this code to your script.js file, after th' existing DOMCon'entLoaded event listener code
 
 // Affiliation slider with active state and controlled movement
 function initAffiliationSlider() {
@@ -326,10 +362,7 @@ function initAffiliationSlider() {
   const visibleSlides = getVisibleSlides();
   let autoplayInterval;
 
-  // Set initial active states
-  updateActiveStates();
-
-  // Function to determine how many slides should be visible based on screen width
+  // Determine how many slides should be visible based on screen width
   function getVisibleSlides() {
     return window.innerWidth < 768 ? 2 : 4;
   }
