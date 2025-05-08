@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Lazy load images
+document.addEventListener("DOMContentLoaded", () => {
+  // Lazy load images with better handling
   const lazyImages = document.querySelectorAll(
     ".gallery-image, .service-image"
   );
@@ -13,9 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const src = img.getAttribute("data-src");
 
             if (src) {
-              img.src = src;
-              img.classList.add("in-view");
-              img.removeAttribute("data-src");
+              // Create a new image object to preload
+              const tempImg = new Image();
+              tempImg.onload = () => {
+                // Once loaded, update the visible image
+                img.src = src;
+                img.classList.add("in-view");
+                img.style.opacity = "1";
+                img.removeAttribute("data-src");
+              };
+              tempImg.src = src;
             }
 
             imageObserver.unobserve(img);
@@ -23,20 +30,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       },
       {
-        rootMargin: "50px 0px",
+        rootMargin: "100px 0px", // Load images earlier
         threshold: 0.01,
       }
     );
 
     lazyImages.forEach((img) => {
       // Store original src in data-src attribute
-      if (!img.getAttribute("data-src")) {
+      if (
+        !img.getAttribute("data-src") &&
+        img.src &&
+        !img.src.includes("data:image")
+      ) {
         img.setAttribute("data-src", img.src);
         // Use a small placeholder initially
         img.src =
-          'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+          'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" fill="%23f5f5f5"%3E%3C/svg%3E';
       }
       imageObserver.observe(img);
+    });
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    lazyImages.forEach((img) => {
+      if (img.getAttribute("data-src")) {
+        img.src = img.getAttribute("data-src");
+      }
     });
   }
 
@@ -95,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (testimonialsTrack) {
     let startX;
     let startY;
-    let currentTranslate = 0;
+    const currentTranslate = 0;
     let isDragging = false;
     let currentIndex = 0;
     const slides = document.querySelectorAll(".testimonial-slide");
@@ -315,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const featuresSection = document.getElementById("get-started");
 
   if (getStartedBtn && featuresSection) {
-    getStartedBtn.addEventListener("click", function (e) {
+    getStartedBtn.addEventListener("click", (e) => {
       e.preventDefault();
       // Scroll to features section smoothly
       featuresSection.scrollIntoView({ behavior: "smooth" });
@@ -364,7 +382,7 @@ function initAffiliationSlider() {
 
   // Determine how many slides should be visible based on screen width
   function getVisibleSlides() {
-    return window.innerWidth < 768 ? 2 : 4;
+    return window.innerWidth < 768 ? 4 : 4;
   }
 
   // Update which slides are active
@@ -378,7 +396,7 @@ function initAffiliationSlider() {
 
     // Update the transform to position the track
     const slideWidth = affiliationSlides[0].offsetWidth;
-    const gapWidth = parseInt(
+    const gapWidth = Number.parseInt(
       window.getComputedStyle(affiliationTrack).columnGap || 40
     );
     const translateX = -(currentIndex * (slideWidth + gapWidth));
@@ -474,7 +492,7 @@ function initAffiliationSlider() {
 }
 
 // Call the function to initialize the affiliation slider
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   // Existing code...
 
   // Initialize the affiliation slider
@@ -482,14 +500,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Media Image Modal functionality
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("mediaImageModal");
   const modalImg = document.getElementById("mediaModalImg");
   const closeBtn = document.querySelector(".media-modal-close");
   const triggers = document.querySelectorAll(".open-image-modal");
 
   triggers.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
       const imgSrc = btn.getAttribute("data-img");
       if (imgSrc) {
@@ -507,12 +525,12 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", function (e) {
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       closeModal();
     }
   });
-  document.addEventListener("keydown", function (e) {
+  document.addEventListener("keydown", (e) => {
     if (
       modal.classList.contains("show") &&
       (e.key === "Escape" || e.key === "Esc")
@@ -523,14 +541,14 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 // Patent Image Modal functionality
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", () => {
   const patentModal = document.getElementById("patentImageModal");
   const patentModalImg = document.getElementById("patentModalImg");
   const patentCloseBtn = patentModal.querySelector(".media-modal-close");
   const patentTriggers = document.querySelectorAll(".clickable-patent");
 
   patentTriggers.forEach((img) => {
-    img.addEventListener("click", function (e) {
+    img.addEventListener("click", (e) => {
       e.preventDefault();
       const imgSrc = img.getAttribute("src");
       if (imgSrc) {
@@ -548,12 +566,12 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   patentCloseBtn.addEventListener("click", closePatentModal);
-  patentModal.addEventListener("click", function (e) {
+  patentModal.addEventListener("click", (e) => {
     if (e.target === patentModal) {
       closePatentModal();
     }
   });
-  document.addEventListener("keydown", function (e) {
+  document.addEventListener("keydown", (e) => {
     if (
       patentModal.classList.contains("show") &&
       (e.key === "Escape" || e.key === "Esc")
