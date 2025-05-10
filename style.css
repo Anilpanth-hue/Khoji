@@ -1283,7 +1283,33 @@ body {
   .get-started-img {
     max-width: 120px;
     max-height: 50px;
-  }}
+  }
+}
+
+/* Features Section Styles for Mobile Screens */
+@media (max-width: 767px) {
+  .get-started-box {
+    width: 90% !important; /* Decrease the width of the boxes */
+    height: auto !important; /* Adjust height automatically */
+    margin: -15px auto !important; /* Add spacing between boxes */
+    padding: -45px !important; /* Add padding inside the boxes */
+    border-radius: 10px !important; /* Keep the rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Add subtle shadow */
+  }
+
+  .get-started-title {
+    font-size: 1.2rem !important; /* Adjust font size for better readability */
+    text-align: center !important; /* Center-align the text */
+    margin-bottom: 10px !important; /* Add spacing below the title */
+  }
+
+  .get-started-img {
+    width: 140px !important; /* Increase the size of the logo */
+    height: auto !important; /* Maintain aspect ratio */
+    display: block !important;
+    margin: 0 auto !important; /* Center the logo */
+  }
+}
 
 /* Patents Section Styles */
 .patents-section {
